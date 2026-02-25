@@ -51,34 +51,65 @@ function BarberDetails() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-100 p-8">
-            <div className="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-md">
-                <h1 className="text-3xl font-bold">{barber.name}</h1>
-                <p className="text-gray-600">{barber.shop}</p>
-                <p className="text-sm text-gray-500 mb-4">{barber.location}</p>
+  <div className="py-10">
 
-                <h2 className="text-xl font-semibold mb-3">Services</h2>
+    <div className="max-w-3xl mx-auto 
+      bg-white dark:bg-gray-800 
+      p-8 rounded-2xl shadow-lg 
+      transition-colors duration-300">
 
-                <div className="space-y-3">
-                    {barber.services.map((service, index) => (
-                        <div
-                         key={index} 
-                         className="flex justify-between bg-gray-50 p-4 rounded-lg"
-                        >
-                            <span>{service.name}</span>
-                            <span>₹ {service.price}</span>
-                        </div>
-                    ))}
-                </div>
+      <h1 className="text-3xl font-bold 
+        text-gray-800 dark:text-white">
+        {barber.name}
+      </h1>
 
-                <button
-                onClick={() => navigate(`/book/${barber.id}`)}
-                className="mt-6 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
-                    Book Appointment
-                </button>
-            </div>
-        </div>
-    );
+      <p className="text-gray-600 dark:text-gray-400">
+        {barber.shop}
+      </p>
+
+      <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+        {barber.location}
+      </p>
+
+      <h2 className="text-xl font-semibold mb-4 
+        text-gray-800 dark:text-white">
+        Services
+      </h2>
+
+      <div className="space-y-3">
+        {barber.services.map((service, index) => (
+          <div
+            key={index}
+            className="flex justify-between 
+            bg-gray-50 dark:bg-gray-700 
+            p-4 rounded-xl 
+            transition-colors duration-300"
+          >
+            <span className="dark:text-gray-200">
+              {service.name}
+            </span>
+
+            <span className="font-semibold dark:text-gray-200">
+              ₹ {service.price}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <button
+        onClick={() => navigate(`/book/${barber.id}`)}
+        className="mt-8 w-full 
+        bg-blue-600 text-white 
+        py-3 rounded-xl 
+        hover:bg-blue-700 
+        transition duration-300"
+      >
+        Book Appointment
+      </button>
+
+    </div>
+  </div>
+);
 }
 
 

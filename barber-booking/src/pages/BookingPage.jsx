@@ -89,29 +89,37 @@ function BookingPage() {
             return;
         }
         
+        const serviceDetails = barber.services.find((service) => service.name === selectedService);
+
         const newBooking = {
             id: Date.now(),
             userId: currentUser.id,
             barberName: barber.name,
             service: selectedService,
+            price: serviceDetails.price,
             date: selectedDate,
             time: selectedTime,
+            paymentStatus: "Pending",
         };
-        addBooking(newBooking);
-        navigate("/my-bookings");
+        
+        navigate("/payment", { state: newBooking });
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 p-8">
-            <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
-                <h1 className="text-2xl font-bold mb-6">
+        <div className="py-8">
+            <div className="max-w-xl mx-auto 
+  bg-white dark:bg-gray-800 
+  p-8 rounded-2xl shadow-lg 
+  transition-colors duration-300">
+                <h1 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">
                     Book an Appointment with {barber.name}
                 </h1>
 
                 {/* Service Selection */}
                 <label className="block mb-2 font-medium">Select Service</label>
                 <select
-                 className="w-full p-2 border ronded mb-4"
+                 className="w-full p-3 border rounded-lg mb-4
+                   bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                  value={selectedService}
                  onChange={(e) => setSelectedService(e.target.value)}>
                     <option value="">
@@ -127,7 +135,9 @@ function BookingPage() {
                 <label className="block mb-2 font-medium">Select Date</label>
                 <input
                     type="date"
-                    className="w-full p-2 border rounded mb-4"
+                    min={new Date().toISOString().split("T")[0]}
+                    className="w-full p-2 border rounded mb-4
+                   bg-white dark:bg-gray-700 text-black border-gray-300 dark:border-gray-600 dark:text-white"
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
                 />
@@ -135,19 +145,34 @@ function BookingPage() {
                 {/* select Time */}
                 <label className="block mb-2 font-medium">Select Time</label>
                 <div className="grid grid-cols-3 gap-3 mb-6">
-                    {timeslots.map((time, index) => (
+                    {timeslots.map((time, index) => {
+
+                        const isBooked = bookings.find(
+                            (booking) => 
+                                booking.barberName === barber.name &&
+                                booking.date === selectedDate &&
+                                booking.time === time
+                        );
+                    
+                        return (
                         <button
                          key={index}
                          onClick={() => setSelectedTime(time)}
-                         className={`p-2 border rounded ${
-                            selectedTime === time 
-                            ? "bg-blue-600 text-white" 
-                            : "bg-white"
-                         }`}
+                         disabled={isBooked}
+                         className={`p-2 rounded-lg border transition duration-200 
+                            ${
+                              isBooked
+                                ? "bg-red-500 text-white cursor-not-allowed"
+                                :selectedTime === time 
+                                ? "bg-blue-600 text-white " 
+                                : "bg-gray-100 dark:bg-gray-700 dark:text-white dark:text-gray-300"
+                            }
+                         `}
                         >
                             {time}
                         </button>
-                    ))}
+                    );
+                })}
                 </div>
                 <button
                  onClick={handleBooking}

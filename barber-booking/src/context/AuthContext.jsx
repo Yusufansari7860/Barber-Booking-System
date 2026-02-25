@@ -1,4 +1,4 @@
-import { createContext,useState, useEffect, use } from "react";
+import { createContext,useState, useEffect, } from "react";
 
 export const AuthContext = createContext();
 
@@ -55,13 +55,39 @@ export const AuthProvider = ({ children}) => {
         return true;
     };
 
+    const resetPassword = (email, newPassword) => {
+    const userIndex = users.findIndex((user) => user.email === email);
+
+    if (userIndex === -1) {
+        alert("Email not found!");
+        return false;
+    }
+
+    const updatedUsers = [...users];
+    updatedUsers[userIndex] = {
+        ...updatedUsers[userIndex],
+        password: newPassword,
+    };
+
+    setUsers(updatedUsers);
+
+    alert("Password updated successfully!");
+    return true;
+};
     const logout = () => {
         setCurrentUser(null);
     };
 
     return (
         <AuthContext.Provider
-            value={{users, currentUser,register,login,logout}}
+            value={{
+    users,
+    currentUser,
+    register,
+    login,
+    logout,
+    resetPassword
+}}
         >
             {children}
         </AuthContext.Provider>

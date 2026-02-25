@@ -4,13 +4,13 @@ function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br 
+    <div className=" bg-gradient-to-br 
       from-blue-50 to-white 
       dark:from-gray-900 dark:to-gray-800 
       transition-colors duration-500">
 
       {/* HERO SECTION */}
-      <div className="flex flex-col items-center justify-center text-center px-6 py-24">
+      <div className="flex flex-col items-center justify-center text-center px-6 sm:px-6 py-20 sm:py-24">
         
         <h1 className="text-5xl md:text-6xl font-extrabold 
           text-gray-800 dark:text-white mb-6">
@@ -27,7 +27,7 @@ function Home() {
 
         <button
           onClick={() => navigate("/barbers")}
-          className="bg-blue-600 text-white px-8 py-3 rounded-full 
+          className="bg-blue-600 text-white px-2 py-3 rounded-full 
           text-lg font-semibold shadow-lg 
           hover:bg-blue-700 transition duration-300"
         >
@@ -36,12 +36,14 @@ function Home() {
       </div>
 
       {/* FEATURES SECTION */}
-      <div className="grid md:grid-cols-3 gap-8 px-8 pb-20 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
+  gap-8 pb-20 max-w-6xl mx-auto">
 
         {/* CARD 1 */}
         <div className="bg-white dark:bg-gray-800 
-          rounded-2xl shadow-md p-8 text-center 
-          hover:shadow-xl transition">
+rounded-2xl shadow-md p-8 text-center 
+hover:shadow-2xl hover:-translate-y-2 
+transition-all duration-300">
 
           <div className="text-4xl mb-4">💈</div>
 
@@ -58,7 +60,8 @@ function Home() {
         {/* CARD 2 */}
         <div className="bg-white dark:bg-gray-800 
           rounded-2xl shadow-md p-8 text-center 
-          hover:shadow-xl transition">
+          hover:shadow-2xl hover:-translate-y-2 
+          transition-all duration-300">
 
           <div className="text-4xl mb-4">⚡</div>
 
@@ -75,7 +78,8 @@ function Home() {
         {/* CARD 3 */}
         <div className="bg-white dark:bg-gray-800 
           rounded-2xl shadow-md p-8 text-center 
-          hover:shadow-xl transition">
+          hover:shadow-2xl hover:-translate-y-2 
+          transition-all duration-300">
 
           <div className="text-4xl mb-4">⭐</div>
 
