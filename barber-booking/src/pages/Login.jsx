@@ -27,6 +27,24 @@ function Login() {
     <div className="min-h-screen flex">
       {/* your same UI here (no change needed visually) */}
 
+      <div className="hidden lg:flex w-1/2 relative">
+        <img
+          src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1600"
+          alt="Barber"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/50"></div>
+
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-10">
+          <h1 className="text-4xl font-bold mb-4">
+            Welcome Back
+          </h1>
+          <p className="text-lg text-gray-200">
+            Your next perfect haircut is just a login away.
+          </p>
+        </div>
+      </div>
+
       <div className="flex w-full lg:w-1/2 items-center justify-center 
         bg-gradient-to-br from-blue-50 to-white 
         dark:from-gray-900 dark:to-gray-800 p-6">
